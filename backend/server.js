@@ -6,6 +6,10 @@ require("dotenv").config();
 // parse requests of content-type -application/json
 app.use(express.json());
 
+let tractorRoutes = require('./routes/tractorRoutes')
+app.use('/api/tractors', tractorRoutes)
+
+
 app.get("/", (req, res) => {
 res.json({ message: "Welcome to my MongoDB application." });
 });
