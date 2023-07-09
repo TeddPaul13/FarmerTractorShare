@@ -1,7 +1,7 @@
 "use strict";
 const Models = require("../models");
-const getTractors = (res) => {
-  Models.Tractor.findAll({})
+const getBookings = (res) => {
+  Models.Booking.findAll({})
     .then(function (data) {
       res.send({ result: 200, data: data });
     })
@@ -9,8 +9,8 @@ const getTractors = (res) => {
       throw err;
     });
 };
-const createTractors = (data, res) => {
-  Models.Tractor.create(data)
+const createBookings = (data, res) => {
+  Models.Booking.create(data)
     .then(function (data) {
       res.send({ result: 200, data: data });
     })
@@ -19,6 +19,6 @@ const createTractors = (data, res) => {
     });
 };
 module.exports = {
-    getTractors,
-    createTractors
+    getBookings,
+    createBookings
   };

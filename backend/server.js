@@ -1,22 +1,25 @@
-
+let express = require("express");
+let app = express();
 let dbConnect = require("./dbConnect");
-const express = require("express");
-const app = express();
-require("dotenv").config();
-// parse requests of content-type -application/json
+dbConnect.connectMysql()
+
+const port = process.env.PORT || 8080;
 app.use(express.json());
 
-let tractorRoutes = require('./routes/tractorRoutes')
-app.use('/api/tractors', tractorRoutes)
+//Set Router
+const farmerRouters = require("./routes/farmerRoutes");
+app.use("/api/farmers", farmerRouters);
 
+const tractorRouters = require("./routes/farmerRoutes");
+app.use("/api/tractors", tractorRouters);
 
-app.get("/", (req, res) => {
-res.json({ message: "Welcome to my MongoDB application." });
-});
+const tractorOwnerRouters = require("./routes/tractorOwnerRoutes");
+app.use("/api/tractorowners", tractorOwnerRouters);
 
-// set port, listen for requests
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-console.log(`Server is running on
-port ${PORT}.`);
-});
+const bookingRouters = require("./routes/bookingRoutes");
+app.use("/api/bookings", bookingRouters);
+
+app.listen(port, () => {
+    console.log("Listening on port ", port);
+  });
+  
