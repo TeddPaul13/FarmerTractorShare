@@ -14,10 +14,11 @@ Tractor.belongsTo(TractorOwner);
 
 
 async function init () {
-    await Farmer.sync();
-    await Tractor.sync()
-    await TractorOwner.sync()
-    await Booking.sync()  
+    await Promise.all([Farmer.sync(), Tractor.sync(),TractorOwner.sync(), Booking.sync()])
+    // await Farmer.sync();
+    // await Tractor.sync()
+    // await TractorOwner.sync()
+    // await Booking.sync()  
     };
     init();
 
