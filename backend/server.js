@@ -10,7 +10,7 @@ app.use(express.json());
 const farmerRouters = require("./routes/farmerRoutes");
 app.use("/api/farmers", farmerRouters);
 
-const tractorRouters = require("./routes/farmerRoutes");
+const tractorRouters = require("./routes/tractorRoutes");
 app.use("/api/tractors", tractorRouters);
 
 const tractorOwnerRouters = require("./routes/tractorOwnerRoutes");
