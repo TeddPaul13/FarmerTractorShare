@@ -9,7 +9,8 @@ import OffcanvasNavbar from './components/OffcanvasNavbar';
 function App() {
   return (
   
-    <div>
+    <div className='App'>
+
     <OffcanvasNavbar/>
     </div>
     
