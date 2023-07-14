@@ -1,11 +1,13 @@
 import React from "react";
 import OffcanvasNavbar from "../components/OffcanvasNavbar";
 import "../App.css"
+import Test from "../components/test";
 
 export default function About() {
   return (
     <div className="App">
       <OffcanvasNavbar />
+      
       <h1>Farmer Tractor Share</h1>
       <h2>How it Works</h2>
       <p>

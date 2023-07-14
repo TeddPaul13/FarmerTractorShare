@@ -6,9 +6,19 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 
-export default function OffcanvasNavbar() {
+export default function OffcanvasNavbar(props) {
+
+  const navigate = useNavigate();
+// Function to navigate to the Create Account page onclick of a button
+  const natigateToCreateAccountPage = () =>{
+    navigate("/createaccount")
+  }
+  // Function to navigate to the Login page onclick of a button
+  const navigateToLoginPage = () =>{
+    navigate('/login')
+  }
   return (
     <>
     {['xxl'].map((expand) => (
@@ -32,8 +42,8 @@ export default function OffcanvasNavbar() {
               <Nav.Link><Link to="/about" className="me-4">About</Link></Nav.Link>
               <Nav.Link> <Link to="/safety" className="me-4">Safety</Link></Nav.Link>
               </Nav>
-              <Button className="me-2 bg-white text-primary " variant="outline-success">Sign In</Button>
-              <Button className="me-2 bg-white text-primary"variant="outline-success">Create Account</Button>
+              <Button className="me-2 bg-white text-primary " variant="outline-success" onClick={navigateToLoginPage}>Sign In</Button>
+              <Button className="me-2 bg-white text-primary"variant="outline-success" onClick={natigateToCreateAccountPage}>Create Account</Button>
               
                
             </Offcanvas.Body>
