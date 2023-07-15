@@ -1,31 +1,41 @@
-const Farmer = require("./farmer")
-const Tractor = require("./tractor")
-const TractorOwner = require("./tractorOwner")
-const Booking = require("./booking")
+const Farmers = require("./farmers");
+const Tractor = require("./tractor");
+const Booking = require("./booking");
+const Address = require("./address");
+const Farmer_address = require("./farmer_address");
+const Tractor_address = require("./tractor_address");
 
-Tractor.hasOne(Booking);   // One to One association
-Booking.belongsTo(Tractor); // One tractor can only be booked once
+Farmers.hasMany(Tractor);
 
-Farmer.hasMany(Booking); //One to Many ...One farmer can do many bookings
-Booking.belongsTo(Farmer); 
+Farmers.hasMany(Booking);
 
-TractorOwner.hasMany(Tractor); // One to Many ...One TractorOwner can have many tractors
-Tractor.belongsTo(TractorOwner);
+Booking.hasOne(Tractor);
 
+// Farmer_address.hasOne(Address);
 
-async function init () {
-    await Promise.all([Farmer.sync(), Tractor.sync(),TractorOwner.sync(), Booking.sync()])
-    // await Farmer.sync();
-    // await Tractor.sync()
-    // await TractorOwner.sync()
-    // await Booking.sync()  
-    };
-    init();
+// Tractor_address.hasOne(Address);
+
+Tractor_address.hasOne(Tractor);
+
+Farmer_address.hasOne(Farmers);
+
+async function init() {
+  await Promise.all([
+    Farmers.sync(),
+    Tractor.sync(),
+    Address.sync(),
+    Tractor_address.sync(),
+    Farmer_address.sync(),
+    Booking.sync(),
+  ]);
+}
+init();
 
 module.exports = {
-
-Farmer,
-Tractor,
-TractorOwner,
-Booking
-}; 
+  Farmers,
+  Tractor,
+  Booking,
+  Address,
+  Farmer_address,
+  Tractor_address,
+};

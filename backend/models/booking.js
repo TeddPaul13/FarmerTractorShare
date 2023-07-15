@@ -1,19 +1,33 @@
 const { DataTypes, Model } = require("sequelize");
 let dbConnect = require("../dbConnect");
+const Farmers = require("./farmers");
+const Tractor = require("./tractor")
 const sequelizeInstance = dbConnect.Sequelize;
 class booking extends Model {}
 //Sequelize will create this table if it doesn't exist on startup
 booking.init(
   {
-    id: {
+    bookings_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    farmerId: { type: DataTypes.STRING, allowNull: false, required: true },
+    farmer_id:{
+      type: DataTypes.INTEGER,
+      references: {
+        model: Farmers,
+        key: 'id'
+      }
+    },
+    tractor_id:{
+      type: DataTypes.INTEGER,
+      references: {
+        model: Tractor,
+        key: 'id'
+      }
+    },
+    bookingDate: { type: DataTypes.STRING, allowNull: false, required: true },
     tractorOwnerId: { type: DataTypes.STRING, allowNull: false, required: true },
-    tractorId: { type: DataTypes.DATE, allowNull: false, required: true },
-    tractorName: { type: DataTypes.STRING, allowNull: false, required: true, unique: true },
     returnDate: { type: DataTypes.DATE, allowNull: false, required: true }
   },
   {
