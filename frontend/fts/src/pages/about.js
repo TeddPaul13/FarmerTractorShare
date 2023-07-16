@@ -7,6 +7,7 @@ export default function About() {
   return (
     <div className="App">
       <OffcanvasNavbar />
+      <Test/>
       
       <h1>Farmer Tractor Share</h1>
       <h2>How it Works</h2>

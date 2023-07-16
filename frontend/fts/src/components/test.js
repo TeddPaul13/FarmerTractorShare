@@ -1,12 +1,15 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
+import OffcanvasNavbar from "./OffcanvasNavbar";
+import { Link } from "react-router-dom";
 
 import {
   MDBBtn,
   MDBContainer,
   MDBCard,
   MDBCardBody,
+  MDBRadio,
   MDBInput,
   MDBCheckbox,
   MDBRow,
@@ -14,40 +17,131 @@ import {
   MDBSelect,
 } from "mdb-react-ui-kit";
 
-export default function Test() {
+export default function CreateAccount() {
   return (
-    <div className="d-flex align-items-center justify-content-center" >
-      <div className="mask gradient-custom-3"></div>
-      <MDBCard className="m-5" style={{ maxWidth: "600px" }}>
-        <MDBCardBody className="px-5">
-          <h2 className="text-uppercase text-center mb-5">Log In</h2>
-          <MDBInput
-            wrapperClass="mb-4"
-            // label="Your Email"
-            placeholder="Enter Your Email"
-            size="lg"
-            id="form2"
-            type="email"
-          />
-          <MDBInput
-            wrapperClass="mb-4"
-            // label="Your Password"
-            placeholder="Your Password"
-            size="lg"
-            id="form2"
-            type="email"
-          />
-          <div className="d-flex flex-row justify-content-center mb-4">
-            <p>Forgot Password?</p>
-          </div>
-          <MDBBtn className="mb-4 w-100 gradient-custom-4" size="lg">
-            Sign In
-          </MDBBtn>
-          <div className="d-flex flex-row justify-content-center mb-4">
-            <p>Not a member? Register</p>
-          </div>
-        </MDBCardBody>
-      </MDBCard>
-    </div>
+    <>
+      <MDBContainer
+        fluid
+        className="d-flex align-items-center justify-content-center"
+      >
+        <div className="mask gradient-custom-3"></div>
+        <MDBCard className="m-5" style={{ maxWidth: "600px" }}>
+          <MDBCardBody className="px-5">
+            <h2 className="text-uppercase text-center mb-5">
+              Enter Tractor Details
+            </h2>
+            
+            <MDBInput
+              wrapperClass="mb-4"
+              // label="Tractor Name"
+              placeholder="Enter Tractor Name"
+              size="lg"
+              id="form2"
+              type="email"
+            />
+            <MDBRow></MDBRow>
+            <MDBInput
+              wrapperClass="mb-4"
+              // label="Your Address"
+              placeholder="Enter Tractor Address"
+              size="lg"
+              id="form2"
+              type="email"
+            />
+            <MDBRow>
+              <MDBCol md="6">
+                <MDBInput
+                  wrapperClass="mb-4"
+                  // label="Suburb"
+                  placeholder="Suburb"
+                  size="lg"
+                  id="form4"
+                  type="text"
+                />
+              </MDBCol>
+
+              <MDBCol md="6">
+                <Form.Select aria-label="Default select example" size="lg">
+                  <option>State</option>
+                  <option value="1">NSW</option>
+                  <option value="2">VIC</option>
+                  <option value="3">WA</option>
+                  <option value="4">SA</option>
+                  <option value="5">TAS</option>
+                  <option value="6">ACT</option>
+                  <option value="7">QLD</option>
+                </Form.Select>
+              </MDBCol>
+            </MDBRow>
+            <MDBRow>
+              <MDBCol md="6">
+                <MDBInput
+                  wrapperClass="mb-4"
+                  // label="Postcode"
+                  placeholder="Postcode"
+                  size="lg"
+                  id="form1"
+                  type="text"
+                />
+              </MDBCol>
+
+              <MDBCol md="6">
+                <MDBInput
+                  wrapperClass="mb-4"
+                  // label="Country"
+                  placeholder="Country"
+                  size="lg"
+                  id="form2"
+                  type="text"
+                />
+              </MDBCol>
+            </MDBRow>
+            <MDBRow>
+
+              <MDBCol md="6" className="d-flex">
+                <div className="">
+                  <p>Is delivery provided?</p>
+                </div>
+              </MDBCol>
+              <MDBCol md="6" className="d-flex">
+                <MDBRadio name='inlineRadio' id='inlineRadio1' value='option1' label='Yes' inline />
+                <MDBRadio name='inlineRadio' id='inlineRadio1' value='option2' label='No' inline />
+              </MDBCol>
+            </MDBRow>
+            <MDBInput
+              wrapperClass="mb-4"
+              // label="Repeat your password"
+              placeholder="Confirm Your Password"
+              size="lg"
+              id="form4"
+              type="password"
+            />
+            <div className="d-flex flex-row justify-content-center mb-4">
+              <MDBCheckbox
+                name="flexCheck"
+                id="flexCheckDefault"
+                label="I agree all statements in Terms of service"
+              />
+            </div>
+            <MDBBtn className="mb-4 w-100 gradient-custom-4" size="lg">
+              Register
+            </MDBBtn>
+            <div className="d-flex flex-row justify-content-center mb-4">
+              <p>
+                Have Account Already? <Link to="/login">Login Here</Link>
+              </p>
+            </div>
+            <div className="row">
+                    <div className="col-md-4">
+                        <Form.Group controlId="dob">
+                            <Form.Label>Select Date</Form.Label>
+                            <Form.Control type="date" name="dob" placeholder="Date of Birth" />
+                        </Form.Group>
+                    </div>
+                </div>
+          </MDBCardBody>
+        </MDBCard>
+      </MDBContainer>
+    </>
   );
 }
