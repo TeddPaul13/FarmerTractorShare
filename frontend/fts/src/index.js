@@ -9,6 +9,7 @@ import CreateAccount from "./components/createAccount";
 import LogIntoAccount from "./components/logIntoAccount";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import LandingPage from "./components/landingPage";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LogIntoAccount />,
+  },
+  {
+    path: "/landingpage",
+    element: <LandingPage />,
   },
 ]);
 

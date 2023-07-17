@@ -1,7 +1,7 @@
 "use strict";
 const Models = require("../models");
-const getFarmers = (res) => {
-  Models.Farmers.findAll({})
+const getAddress = (res) => {
+  Models.Address.findAll({})
     .then(function (data) {
       res.send({ result: 200, data: data });
     })
@@ -9,8 +9,8 @@ const getFarmers = (res) => {
       throw err;
     });
 };
-const createFarmers = (data, res) => {
-  Models.Farmers.create(data)
+const createAddress = (data, res) => {
+  Models.Address.create(data)
     .then(function (data) {
       res.send({ result: 200, data: data });
     })
@@ -19,6 +19,6 @@ const createFarmers = (data, res) => {
     });
 };
 module.exports = {
-    getFarmers,
-    createFarmers
+    getAddress,
+    createAddress
   };
