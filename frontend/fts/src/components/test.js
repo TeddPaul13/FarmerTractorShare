@@ -3,6 +3,7 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import OffcanvasNavbar from "./OffcanvasNavbar";
 import { Link } from "react-router-dom";
+import '../App.css';
 
 import {
   MDBBtn,
@@ -16,6 +17,10 @@ import {
   MDBCol,
   MDBSelect,
 } from "mdb-react-ui-kit";
+
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 export default function CreateAccount() {
   return (
@@ -132,12 +137,9 @@ export default function CreateAccount() {
               </p>
             </div>
             <div className="row">
-                    <div className="col-md-4">
-                        <Form.Group controlId="dob">
-                            <Form.Label>Select Date</Form.Label>
-                            <Form.Control type="date" name="dob" placeholder="Date of Birth" />
-                        </Form.Group>
-                    </div>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DatePicker />
+    </LocalizationProvider>
                 </div>
           </MDBCardBody>
         </MDBCard>

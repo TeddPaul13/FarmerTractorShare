@@ -29,13 +29,13 @@ farmers.init(
 );
 module.exports = farmers;
 
-async function dropTable() {
-  try {
-    await farmer.drop(); // Drop tables defined in your Sequelize models
-    console.log('Table dropped successfully.');
-  } catch (error) {
-    console.error('Error dropping table:', error);
-  }
-}
+// async function dropTable() {
+//   try {
+//     await farmer.drop(); // Drop tables defined in your Sequelize models
+//     console.log('Table dropped successfully.');
+//   } catch (error) {
+//     console.error('Error dropping table:', error);
+//   }
+// }
 
-dropTable();
+// dropTable();
