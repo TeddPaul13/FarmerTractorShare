@@ -19,11 +19,14 @@ import {
 } from "mdb-react-ui-kit";
 
 export default function CreateAccount() {
-// Transfer navigation function to handle submit after finalising the validation for create Account.
-  const navigate = useNavigate();
-    const natigateToLandingPage = () =>{
-      navigate("/landingpage")
-    }
+
+   // Transfer navigation function to handle submit after finalising the validation for create Account.
+   const navigate = useNavigate();
+  //  const natigateToLandingPage = () =>{
+  //    navigate("/landingpage")
+  //  }
+ 
+
   const [values, setValues] = useState({
     firstName:'', lastName:'', address:'', suburb:'', state:'', postcode:'',
     email:'', password:'', confrimPassword:'', country:''
@@ -36,9 +39,14 @@ export default function CreateAccount() {
 
   const handleSubmit = (event) =>{
     event.preventDefault();
-    setErrors(Validation(values))
-  }
+    const validationResults = Validation(values)
+    setErrors(validationResults);
   
+    if (validationResults.email === "" && validationResults.password === "" && validationResults.firstName === "" && validationResults.lastName === "") {
+      // If no error in login page navigate to Landing page #FETCH DATA HERE later#
+      navigate("/landingpage");
+    }}
+ 
   return (
     <>
       <OffcanvasNavbar />
@@ -99,7 +107,7 @@ export default function CreateAccount() {
             />
             {errors.email && <span className="text-danger">{errors.email} </span>}
             </div>
-            <div className="mb-4">
+            {/* <div className="mb-4">
             <MDBInput
               //wrapperClass="mb-4"
               // label="Your Address"
@@ -111,8 +119,8 @@ export default function CreateAccount() {
               onChange={handleInput}
             />
             {errors.address && <span className="text-danger">{errors.address} </span>}
-           </div>
-            <MDBRow>
+           </div> */}
+            {/* <MDBRow>
               <MDBCol md="6">
               <div className="mb-4">
                 <MDBInput
@@ -143,8 +151,8 @@ export default function CreateAccount() {
                 </Form.Select>
                 {errors.state && <span className="text-danger">{errors.state} </span>}
               </MDBCol>
-            </MDBRow>
-            <MDBRow>
+            </MDBRow> */}
+            {/* <MDBRow>
               <MDBCol md="6">
               <div className="mb-4">
                 <MDBInput
@@ -176,7 +184,7 @@ export default function CreateAccount() {
                 {errors.country && <span className="text-danger">{errors.country} </span>}
                 </div>
               </MDBCol>
-            </MDBRow>
+            </MDBRow> */}
             <div className="mb-4">
             <MDBInput
               //wrapperClass="mb-4"  
@@ -210,7 +218,7 @@ export default function CreateAccount() {
                 label="I agree all statements in Terms of service"
               />
             </div>
-            <MDBBtn className="mb-4 w-100 gradient-custom-4" size="lg" onClick={natigateToLandingPage}>
+            <MDBBtn className="mb-4 w-100 gradient-custom-4" size="lg" onClick={handleSubmit} >
               Register
             </MDBBtn>
             <div className="d-flex flex-row justify-content-center mb-4">
@@ -224,4 +232,4 @@ export default function CreateAccount() {
       </MDBContainer>
     </>
   );
-}
+};

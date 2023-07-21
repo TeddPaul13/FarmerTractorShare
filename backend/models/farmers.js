@@ -19,6 +19,11 @@ farmers.init(
       unique: true,
     },
     password: { type: DataTypes.STRING, allowNull: false, required: true },
+
+    // address: { type: DataTypes.INTEGER, allowNull: true, required: false },
+    // postcode: { type: DataTypes.INTEGER, allowNull: true, required: false },
+    // suburb: { type: DataTypes.STRING, allowNull: true, required: false },
+    // state: { type: DataTypes.STRING, allowNull: true, required: false },
   },
   {
     sequelize: sequelizeInstance,

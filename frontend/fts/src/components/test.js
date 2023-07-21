@@ -116,11 +116,26 @@ export default function CreateAccount() {
             <MDBInput
               wrapperClass="mb-4"
               // label="Repeat your password"
-              placeholder="Confirm Your Password"
+              placeholder="Price Per Day"
               size="lg"
               id="form4"
-              type="password"
+              type="text"
             />
+                <MDBRow>
+                <MDBCol md="6" className="d-flex mb-4">
+                  <p>Upload Tractor Image</p>
+                  </MDBCol>
+                  <MDBCol md="6" className="d-flex">
+                <div className="d-flex flex-row justify-content-center mb-4">
+              <MDBInput
+                name="flexCheck"
+                id="flexCheckDefault"
+                // label="Upload Pictures"
+                type="file"
+              />
+            </div>
+            </MDBCol>
+            </MDBRow>
             <div className="d-flex flex-row justify-content-center mb-4">
               <MDBCheckbox
                 name="flexCheck"
@@ -128,13 +143,11 @@ export default function CreateAccount() {
                 label="I agree all statements in Terms of service"
               />
             </div>
-            <MDBBtn className="mb-4 w-100 gradient-custom-4" size="lg">
-              Register
+
+            <div className=" d-flex justify-content-center">
+            <MDBBtn className="mb-4 w-50  gradient-custom-4" size="lg">
+              Upload
             </MDBBtn>
-            <div className="d-flex flex-row justify-content-center mb-4">
-              <p>
-                Have Account Already? <Link to="/login">Login Here</Link>
-              </p>
             </div>
             <div className="row">
             <LocalizationProvider dateAdapter={AdapterDayjs}>

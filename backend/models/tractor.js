@@ -24,7 +24,11 @@ tractor.init(
     availabilty: { type: DataTypes.STRING, allowNull: false, required: true },
     deliveryOption: { type: DataTypes.STRING, allowNull: true, required: true },
     pricePerDay: { type: DataTypes.INTEGER, allowNull: false, required: true },
-  },
+  //   address: { type: DataTypes.INTEGER, allowNull: false, required: true },
+  //   postcode: { type: DataTypes.INTEGER, allowNull: false, required: true },
+  //   suburb: { type: DataTypes.STRING, allowNull: false, required: true },
+  //   state: { type: DataTypes.STRING, allowNull: false, required: true },
+   },
   {
     sequelize: sequelizeInstance,
     modelName: "tractor",

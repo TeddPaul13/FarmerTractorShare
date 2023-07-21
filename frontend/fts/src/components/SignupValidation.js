@@ -49,9 +49,10 @@ function Validation(values) {
 
   if (values.password === "") {
     error.password = "Password should not be empty";
-  } else if (!passwordRegex.test(values.password)) {
-    error.password = "Enter stronger password"; // Change this error message to indicate recommended format (Atlest 1 digit, 1 small char, 1 large char, minimum 8)
-  } else {
+  // } else if (!passwordRegex.test(values.password)) {
+  //   error.password = "Enter stronger password"; // Change this error message to indicate recommended format (Atlest 1 digit, 1 small char, 1 large char, minimum 8)
+  } 
+  else {
     error.password = "";
   }
 // Error message not showing for confirm password

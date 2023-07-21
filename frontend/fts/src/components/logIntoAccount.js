@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
 import Validation from "./LoginValidation";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 import {
   MDBBtn,
@@ -21,8 +21,7 @@ import { useState } from "react";
 
 export default function LogIntoAccount() {
   const navigate = useNavigate();
- 
-    
+
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -34,11 +33,14 @@ export default function LogIntoAccount() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setErrors(Validation(values));
-    if (errors.name ==="" && errors.email ===""){
+    const validationResults = Validation(values)
+    setErrors(validationResults);
+  
+    if (validationResults.email === "" && validationResults.password === "") {
       // If no error in login page navigate to Landing page #FETCH DATA HERE later#
-      navigate("/landingpage")
+      navigate("/landingpage");
     }
+    console.log(errors)
   };
 
   return (
@@ -48,7 +50,7 @@ export default function LogIntoAccount() {
         fluid
         className="d-flex align-items-center justify-content-center"
       >
-        <form action="" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <div className="mask gradient-custom-3"></div>
           <MDBCard className="m-5" style={{ maxWidth: "600px" }}>
             <MDBCardBody className="px-5">
@@ -96,7 +98,7 @@ export default function LogIntoAccount() {
 
               <div className="d-flex flex-row justify-content-center mb-4">
                 <p>
-                  Not a member? <Link to="/createaccount">Register</Link>
+                  Not a member? <Link to="/createaccount" className="text-decoration-none">Register</Link>
                 </p>
               </div>
             </MDBCardBody>
