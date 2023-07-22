@@ -20,10 +20,10 @@ farmers.init(
     },
     password: { type: DataTypes.STRING, allowNull: false, required: true },
 
-    // address: { type: DataTypes.INTEGER, allowNull: true, required: false },
-    // postcode: { type: DataTypes.INTEGER, allowNull: true, required: false },
-    // suburb: { type: DataTypes.STRING, allowNull: true, required: false },
-    // state: { type: DataTypes.STRING, allowNull: true, required: false },
+    address: { type: DataTypes.STRING, allowNull: true, required: false },
+    postcode: { type: DataTypes.INTEGER, allowNull: true, required: false },
+    suburb: { type: DataTypes.STRING, allowNull: true, required: false },
+    state: { type: DataTypes.STRING, allowNull: true, required: false },
   },
   {
     sequelize: sequelizeInstance,
@@ -33,14 +33,3 @@ farmers.init(
   }
 );
 module.exports = farmers;
-
-// async function dropTable() {
-//   try {
-//     await farmer.drop(); // Drop tables defined in your Sequelize models
-//     console.log('Table dropped successfully.');
-//   } catch (error) {
-//     console.error('Error dropping table:', error);
-//   }
-// }
-
-// dropTable();

@@ -13,9 +13,6 @@ app.use("/api/farmers", farmerRouters);
 const tractorRouters = require("./routes/tractorRoutes");
 app.use("/api/tractors", tractorRouters);
 
-const tractorOwnerRouters = require("./routes/tractorOwnerRoutes");
-app.use("/api/tractorowners", tractorOwnerRouters);
-
 const bookingRouters = require("./routes/bookingRoutes");
 app.use("/api/bookings", bookingRouters);
 

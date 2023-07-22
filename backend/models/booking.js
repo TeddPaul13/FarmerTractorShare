@@ -27,7 +27,6 @@ booking.init(
       }
     },
     bookingDate: { type: DataTypes.STRING, allowNull: false, required: true },
-    tractorOwnerId: { type: DataTypes.STRING, allowNull: false, required: true },
     returnDate: { type: DataTypes.DATE, allowNull: false, required: true }
   },
   {

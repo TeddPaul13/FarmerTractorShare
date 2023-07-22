@@ -7,4 +7,13 @@ router.get("/", (req, res) => {
 router.post("/create", (req, res) => {
   Controllers.tractorController.createTractors(req.body, res);
 });
+router.put("/update/:id", (req, res) => {
+  Controllers.tractorController.updateTractorById(req, res);
+});
+router.delete("/delete/:id", (req, res) => {
+  Controllers.tractorController.deleteTractorById(req, res);
+});
+router.get("/finduser/:id", (req, res) => {
+  Controllers.tractorController.findTractorById(res);
+});
 module.exports = router;
