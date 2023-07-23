@@ -1,6 +1,17 @@
 const express = require("express");
 const router = express.Router();
+const { signupValidation, loginValidation } = require('../Validation'); // for JWT
 const Controllers = require("../controllers");
+
+
+
+//for JWT test
+router.post('/register', signupValidation, Controllers.farmerController.registerUser);
+router.post('/login', loginValidation, Controllers.farmerController.loginUser);
+router.post('/get-user', signupValidation, Controllers.farmerController.getUser);
+
+//********JWT test End */
+
 router.get("/", (req, res) => {
   Controllers.farmerController.getFarmers(res);
 });
