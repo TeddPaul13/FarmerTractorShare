@@ -7,6 +7,7 @@ import Safety from "./pages/safety";
 import reportWebVitals from "./reportWebVitals";
 import CreateAccount from "./components/createAccount";
 import LogIntoAccount from "./components/logIntoAccount";
+import ListTractor from "./components/listTractor";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LandingPage from "./components/landingPage";
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
   {
     path: "/landingpage",
     element: <LandingPage />,
+  },
+  {
+    path: "/listatractor",
+    element: <ListTractor />,
   },
 ]);
 

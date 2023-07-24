@@ -18,97 +18,121 @@ const getFarmers = (res) => {
 };
 
 // Test JWT Here
-const registerUser = (req, res, next) => {
-  db.query(
-    `SELECT * FROM farmers WHERE LOWER(emailId) = LOWER(${db.escape(
-      req.body.email
-    )});`,
-    (err, result) => {
-      if (result.length) {
-        return res.status(409).send({
-          msg: "This user is already in use!",
-        });
-      } else {
-        bcrypt.hash(req.body.password, 10, (err, hash) => {
-          if (err) {
-            return res.status(500).send({
-              msg: err,
-            });
-          } else {
-            db.query(
-              `INSERT INTO farmers (firstName, lastName, emailId, password) VALUES ('${
-                req.body.name
-              }', ${db.escape(req.body.email)}, ${db.escape(hash)})`,
-              (err, result) => {
-                if (err) {
-                  throw err;
-                  return res.status(400).send({
-                    msg: err,
-                  });
-                }
-                return res.status(201).send({
-                  msg: "The user has been registered with us!",
-                });
-              }
-            );
-          }
-        });
-      }
-    }
-  );
-};
-const loginUser = (req, res, next) => {
-  db.query(
-    `SELECT * FROM farmers WHERE emailId = ${db.escape(req.body.email)};`,
-    (err, result) => {
-      if (err) {
-        throw err;
-        return res.status(400).send({
-          msg: err,
-        });
-      }
-      if (!result.length) {
-        return res.status(401).send({
-          msg: "Email or password is incorrect!",
-        });
-      }
+const registerUser = async (req, res, next) => {
+  const newFarmer = await Models.Farmers.findOne({
+    where: { emailId: req.body.email },
+  });
+  
 
-      bcrypt.compare(
-        req.body.password,
-        result[0]["password"],
-        (bErr, bResult) => {
-          if (bErr) {
-            throw bErr;
-            return res.status(401).send({
-              msg: "Email or password is incorrect!",
-            });
-          }
-          if (bResult) {
-            const token = jwt.sign(
-              { id: result[0].id },
-              "the-super-strong-secret",
-              {
-                expiresIn: "1h",
-              }
-            );
-            db.query(
-              `UPDATE farmers SET last_login = now() WHERE id = '${result[0].id}'`
-            );
-            return res.status(200).send({
-              msg: "Logged in!",
-              token,
-              user: result[0],
-            });
-          }
-          return res.status(401).send({
-            msg: "Username or password is incorrect!",
-          });
-        }
-      );
+  if (newFarmer) {
+    return res.status(409).send({
+      msg: "This user is already in use!",
+      status: false
+    });
+  }
+
+  bcrypt.hash(req.body.password, 10, async (err, hash) => {
+    if (err) {
+      return res.status(500).send({
+        msg: err,
+        status: false
+      });
     }
-  );
+    const user = await Models.Farmers.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      emailId: req.body.emailId,
+      password: hash,
+    });
+    return res.status(200).send({
+      status: true,
+      msg: "The user has been registered with us!",
+    });
+  });
+  // 
 };
-const getUser = (req, res, next) => {
+const loginUser = async (req, res, next) => {
+  const farmer = await Models.Farmers.findOne({
+    where: { emailId: req.body.emailId}, 
+  
+  })
+ if (!farmer) {
+   return res.status(401).send({
+     msg: "Email or password is incorrect!",
+     status: false
+   });
+ }
+  const checkPassword = await bcrypt.compare(req.body.password, farmer.password);
+  if (!checkPassword) {
+    return res.status(401).send({
+      msg: "Email or password is incorrect!",
+      status: false
+    });
+  }
+
+  const token = jwt.sign({ id: farmer.farmer_id }, "the-super-strong-secret", {
+    expiresIn: "1h",
+  });
+  return res.status(200).send({
+    msg: "Logged in!",
+    token,
+    data: farmer,
+    status: true
+  });
+  
+
+}
+//     db.query(
+//       `SELECT * FROM farmers WHERE emailId = ${req.body.email};`,
+//       (err, result) => {
+//         if (err) {
+//           throw err;
+//           return res.status(400).send({
+//             msg: err,
+//           });
+//         }
+//         if (!result.length) {
+//           return res.status(401).send({
+//             msg: "Email or password is incorrect!",
+//           });
+//         }
+
+//         bcrypt.compare(
+//           req.body.password,
+//           result[0]["password"],
+//           (bErr, bResult) => {
+//             if (bErr) {
+//               throw bErr;
+//               return res.status(401).send({
+//                 msg: "Email or password is incorrect!",
+//               });
+//             }
+//             if (bResult) {
+//               const token = jwt.sign(
+//                 { id: result[0].id },
+//                 "the-super-strong-secret",
+//                 {
+//                   expiresIn: "1h",
+//                 }
+//               );
+//               db.query(
+//                 `UPDATE farmers SET last_login = now() WHERE id = '${result[0].id}'`
+//               );
+//               return res.status(200).send({
+//                 msg: "Logged in!",
+//                 token,
+//                 user: result[0],
+//               });
+//             }
+//             return res.status(401).send({
+//               msg: "Username or password is incorrect!",
+//             });
+//           }
+//         );
+//       }
+//     );
+// };
+const getUser = async (req, res, next) => {
   if (
     !req.headers.authorization ||
     !req.headers.authorization.startsWith("Bearer") ||
@@ -121,6 +145,8 @@ const getUser = (req, res, next) => {
 
   const theToken = req.headers.authorization.split(" ")[1];
   const decoded = jwt.verify(theToken, "the-super-strong-secret");
+
+  await Models.Farmers.findAll({})
   db.query(
     "SELECT * FROM farmers where id=?",
     decoded.id,
