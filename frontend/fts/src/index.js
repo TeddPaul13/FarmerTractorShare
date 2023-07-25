@@ -11,6 +11,7 @@ import ListTractor from "./components/listTractor";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LandingPage from "./components/landingPage";
+import ConfirmBookingDetails from "./components/ConfirmBookingDetails";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
   {
     path: "/listatractor",
     element: <ListTractor />,
+  },
+  {
+    path: "/confirmbooking",
+    element: <ConfirmBookingDetails />,
   },
 ]);
 

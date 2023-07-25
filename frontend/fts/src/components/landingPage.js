@@ -14,6 +14,9 @@ function LandingPage() {
   const navigateToListTractor = () =>{
     navigate("/listatractor")
   }
+  const navigateToConfrimBooking= () =>{
+    navigate("/confirmbooking")
+  }
 
 
   const [tractorList, setTractorList] = useState([]);
@@ -35,22 +38,30 @@ function LandingPage() {
   return (
     <div>
       <OffcanvasNavbar />
-      <div className="d-flex justify-content-center align-items-center">
-        <h1>Welcome User</h1>
+      <div className=" mb-4 d-flex justify-content-center align-items-center">
+        <h2>Welcome to Farmer Tractor Share</h2>
       </div>
       <div className="d-flex justify-content-center align-items-center">
-        <Row className="mb=4">
+        <Row >
           <Col>
-            <button className="mb-4 w-100 border-0 gradient-custom-4" size="lg">
-              Check out More Tractor
-            </button>
-          </Col>
-          <Col>
-            <button className="mb-4 w-100 border-0 gradient-custom-4" size="lg" onClick={navigateToListTractor}>
+            <button className="mb-4 w-100 border-0 fs-4 rounded-2 bg-info text-white fw-bold" variant="outline-success" size="lg" onClick={navigateToListTractor}>
               List a Tractor
             </button>
           </Col>
         </Row>
+        </div>
+        <div className="mb-4 d-flex justify-content-center align-items-center">
+        <Row >
+          <Col>
+            <h4 > Enter your postcode to Search Available Tractors near you</h4>
+          </Col>
+          <Col className="d-flex justify-content-left align-items-center">
+          <input className="form-control bg-light w-50" type="search" placeholder="Enter postcode here" aria-label="Search" />
+          </Col>
+        </Row>
+      </div>
+      <div className="mb-4 d-flex justify-content-center align-items-center">
+        <h5>Available Tractors for Hire</h5>
       </div>
       <Container> 
         <Row>
@@ -67,7 +78,7 @@ function LandingPage() {
                   <Card.Title>{tractor.name}</Card.Title>
                   <Card.Text>{tractor.abbrev}</Card.Text>
                   <div className="d-flex justify-content-center">
-                  <button className="mb-4 border-0 gradient-custom-4" size="lg"> Book Tractor</button>
+                  <button className="mb-4 border-0 gradient-custom-4" size="lg" onClick={navigateToConfrimBooking}> Book Tractor</button>
                   </div>
                 </Card.Body>
               </Card>

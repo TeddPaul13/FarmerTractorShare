@@ -20,14 +20,13 @@ const getFarmers = (res) => {
 // Test JWT Here
 const registerUser = async (req, res, next) => {
   const newFarmer = await Models.Farmers.findOne({
-    where: { emailId: req.body.email },
+    where: { email: req.body.email },
   });
-  
 
   if (newFarmer) {
     return res.status(409).send({
       msg: "This user is already in use!",
-      status: false
+      status: false,
     });
   }
 
@@ -35,13 +34,13 @@ const registerUser = async (req, res, next) => {
     if (err) {
       return res.status(500).send({
         msg: err,
-        status: false
+        status: false,
       });
     }
     const user = await Models.Farmers.create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      emailId: req.body.emailId,
+      email: req.body.email,
       password: hash,
     });
     return res.status(200).send({
@@ -49,24 +48,26 @@ const registerUser = async (req, res, next) => {
       msg: "The user has been registered with us!",
     });
   });
-  // 
+  //
 };
 const loginUser = async (req, res, next) => {
   const farmer = await Models.Farmers.findOne({
-    where: { emailId: req.body.emailId}, 
-  
-  })
- if (!farmer) {
-   return res.status(401).send({
-     msg: "Email or password is incorrect!",
-     status: false
-   });
- }
-  const checkPassword = await bcrypt.compare(req.body.password, farmer.password);
+    where: { email: req.body.email},
+  });
+  if (!farmer) {
+    return res.status(401).send({
+      msg: "Email or password is incorrect!",
+      status: false,
+    });
+  }
+  const checkPassword = await bcrypt.compare(
+    req.body.password,
+    farmer.password
+  );
   if (!checkPassword) {
     return res.status(401).send({
       msg: "Email or password is incorrect!",
-      status: false
+      status: false,
     });
   }
 
@@ -77,89 +78,38 @@ const loginUser = async (req, res, next) => {
     msg: "Logged in!",
     token,
     data: farmer,
-    status: true
+    status: true,
   });
-  
-
-}
-//     db.query(
-//       `SELECT * FROM farmers WHERE emailId = ${req.body.email};`,
-//       (err, result) => {
-//         if (err) {
-//           throw err;
-//           return res.status(400).send({
-//             msg: err,
-//           });
-//         }
-//         if (!result.length) {
-//           return res.status(401).send({
-//             msg: "Email or password is incorrect!",
-//           });
-//         }
-
-//         bcrypt.compare(
-//           req.body.password,
-//           result[0]["password"],
-//           (bErr, bResult) => {
-//             if (bErr) {
-//               throw bErr;
-//               return res.status(401).send({
-//                 msg: "Email or password is incorrect!",
-//               });
-//             }
-//             if (bResult) {
-//               const token = jwt.sign(
-//                 { id: result[0].id },
-//                 "the-super-strong-secret",
-//                 {
-//                   expiresIn: "1h",
-//                 }
-//               );
-//               db.query(
-//                 `UPDATE farmers SET last_login = now() WHERE id = '${result[0].id}'`
-//               );
-//               return res.status(200).send({
-//                 msg: "Logged in!",
-//                 token,
-//                 user: result[0],
-//               });
-//             }
-//             return res.status(401).send({
-//               msg: "Username or password is incorrect!",
-//             });
-//           }
-//         );
-//       }
-//     );
-// };
-const getUser = async (req, res, next) => {
-  if (
-    !req.headers.authorization ||
-    !req.headers.authorization.startsWith("Bearer") ||
-    !req.headers.authorization.split(" ")[1]
-  ) {
-    return res.status(422).json({
-      message: "Please provide the token",
-    });
-  }
-
-  const theToken = req.headers.authorization.split(" ")[1];
-  const decoded = jwt.verify(theToken, "the-super-strong-secret");
-
-  await Models.Farmers.findAll({})
-  db.query(
-    "SELECT * FROM farmers where id=?",
-    decoded.id,
-    function (error, results, fields) {
-      if (error) throw error;
-      return res.send({
-        error: false,
-        data: results[0],
-        message: "Fetch Successfully.",
-      });
-    }
-  );
 };
+
+// const getUser = async (req, res, next) => {
+//   if (
+//     !req.headers.authorization ||
+//     !req.headers.authorization.startsWith("Bearer") ||
+//     !req.headers.authorization.split(" ")[1]
+//   ) {
+//     return res.status(422).json({
+//       message: "Please provide the token",
+//     });
+//   }
+
+//   const theToken = req.headers.authorization.split(" ")[1];
+//   const decoded = jwt.verify(theToken, "the-super-strong-secret");
+
+//   //await Models.Farmers.findAll({});
+//   db.query(
+//     "SELECT * FROM farmers where id=?",
+//     decoded.id,
+//     function (error, results, fields) {
+//       if (error) throw error;
+//       return res.send({
+//         error: false,
+//         data: results[0],
+//         message: "Fetch Successfully.",
+//       });
+//     }
+//   );
+// };
 //******************************************End JWT Test ***************************************/
 
 const createFarmers = (data, res) => {
@@ -242,6 +192,6 @@ module.exports = {
   deleteFarmerById,
   findFarmerById,
   registerUser,
-  loginUser,
-  getUser,
+  loginUser
+  // getUser,
 };

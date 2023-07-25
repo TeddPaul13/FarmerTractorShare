@@ -5,6 +5,8 @@ import OffcanvasNavbar from "./OffcanvasNavbar";
 import { Link } from "react-router-dom";
 import Validation from "./SignupValidation";
 import { useNavigate } from 'react-router-dom';
+import Button from "react-bootstrap/esm/Button";
+import axios from "axios";
 
 import {
   MDBBtn,
@@ -25,11 +27,11 @@ export default function CreateAccount() {
   //  const natigateToLandingPage = () =>{
   //    navigate("/landingpage")
   //  }
- 
+
 
   const [values, setValues] = useState({
     firstName:'', lastName:'', address:'', suburb:'', state:'', postcode:'',
-    email:'', password:'', confrimPassword:'', country:''
+    emailId:'', password:'', confrimPassword:'', country:''
     
   })
   const [errors, setErrors] = useState({})
@@ -43,8 +45,20 @@ export default function CreateAccount() {
     setErrors(validationResults);
   
     if (validationResults.email === "" && validationResults.password === "" && validationResults.firstName === "" && validationResults.lastName === "") {
+      
       // If no error in login page navigate to Landing page #FETCH DATA HERE later#
-      navigate("/landingpage");
+      axios
+    .post("http://localhost:8080/api/farmers/register/", values)
+    .then((response) => {
+      console.log(response);
+      alert("Registration Succesful")
+      navigate("/login");
+    })
+    .catch((err) => {
+      console.log(err);
+      alert("An error occured")
+    })
+      
     }}
  
   return (
@@ -218,9 +232,9 @@ export default function CreateAccount() {
                 label="I agree all statements in Terms of service"
               />
             </div>
-            <MDBBtn className="mb-4 w-100 gradient-custom-4" size="lg" onClick={handleSubmit} >
+            <Button className="mb-4 w-100 gradient-custom-4" size="lg" onClick={handleSubmit} >
               Register
-            </MDBBtn>
+            </Button>
             <div className="d-flex flex-row justify-content-center mb-4">
               <p>
                 Have Account Already? <Link to="/login">Login Here</Link>

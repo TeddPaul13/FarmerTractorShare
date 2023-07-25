@@ -1,14 +1,15 @@
 import React from "react";
 import OffcanvasNavbar from "../components/OffcanvasNavbar";
+import Container from 'react-bootstrap/esm/Container'
 import "../App.css"
 
 export default function About() {
   return (
     <div className="App">
       <OffcanvasNavbar />
-      
-      <h1>Farmer Tractor Share</h1>
-      <h2>How it Works</h2>
+      <Container>
+      <h2>Farmer Tractor Share</h2>
+      <h3>How it Works</h3>
       <p>
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -18,7 +19,7 @@ export default function About() {
         occaecat cupidatat non proident, sunt in culpa qui officia deserunt
         mollit anim id est laborum."
       </p>
-      <h2>Who can Benefit</h2>
+      <h3>Who can Benefit</h3>
       <p>
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -28,6 +29,7 @@ export default function About() {
         occaecat cupidatat non proident, sunt in culpa qui officia deserunt
         mollit anim id est laborum."
       </p>
+      </Container>
     </div>
   );
 }

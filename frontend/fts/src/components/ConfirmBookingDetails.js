@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
@@ -19,23 +19,20 @@ import {
   MDBSelect,
 } from "mdb-react-ui-kit";
 
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-
-function ListTractor() {
+function ConfirmBookingDetails() {
   return (
     <div>
-      <OffcanvasNavbar />
+        <OffcanvasNavbar />
       <MDBContainer
         fluid
         className="d-flex align-items-center justify-content-center"
       >
+        <form>
         <div className="mask gradient-custom-3"></div>
         <MDBCard className="m-5" style={{ maxWidth: "600px" }}>
           <MDBCardBody className="px-5">
-            <h2 className="text-uppercase text-center mb-5">
-              Enter Tractor Details
+            <h2 className="text-capitalize text-center mb-5">
+              Confirm Your Booking Details
             </h2>
 
             <MDBInput
@@ -45,6 +42,7 @@ function ListTractor() {
               size="md"
               id="form2"
               type="email"
+              name="tractorModel"
             />
              <MDBInput
               wrapperClass="mb-4"
@@ -53,12 +51,14 @@ function ListTractor() {
               size="md"
               id="form3"
               type="text"
+              name="tractorImage"
             />
             <div className="form-floating mb-4">
               <textarea
                 class="form-control"
                 placeholder="tractor description"
                 id="floatingTextarea"
+                name="tractorDescription"
               ></textarea>
               <label for="floatingTextarea">Enter Tractor Description</label>
             </div>
@@ -71,11 +71,12 @@ function ListTractor() {
                   size="md"
                   id="form4"
                   type="text"
+                  name="tractorAddress"
                 />
               </MDBCol>
 
               <MDBCol md="6">
-                <Form.Select aria-label="Default select example" size="md">
+                <Form.Select aria-label="Default select example" size="md" name="tractorState">
                   <option>State</option>
                   <option value="1">NSW</option>
                   <option value="2">VIC</option>
@@ -96,6 +97,7 @@ function ListTractor() {
                   size="md"
                   id="form1"
                   type="text"
+                  name="tractorSurburb"
                 />
               </MDBCol>
 
@@ -107,6 +109,7 @@ function ListTractor() {
                   size="md"
                   id="form2"
                   type="text"
+                  name="tractorPostcode"
                 />
               </MDBCol>
             </MDBRow>
@@ -117,7 +120,7 @@ function ListTractor() {
                   wrapperClass="mb-4"
                   // label="Postcode"
                   placeholder="Available from"
-                  name=" availablefrom"
+                  name=" availableFrom"
                   size="md"
                   id="form1"
                   type="date"
@@ -133,6 +136,7 @@ function ListTractor() {
                   size="md"
                   id="form2"
                   type="date"
+                  name="availableUntil"
                 />
               </MDBCol>
             </MDBRow>
@@ -154,6 +158,7 @@ function ListTractor() {
                 class="form-control"
                 aria-label="Dollar amount (with dot and two decimal places)"
                 placeholder="Enter Price per day"
+                name="pricePerDay"
               />
               <span class="input-group-text">AU$</span>
               <span class="input-group-text">0.00</span>
@@ -182,15 +187,16 @@ function ListTractor() {
             </div>
 
             <div className=" d-flex justify-content-center">
-              <Button className="mb-4 w-50  gradient-custom-4" size="lg">
-                Submit
+              <Button className="mb-4 w-50  gradient-custom-4" size="lg" type="submit">
+                Book
               </Button>
             </div>
           </MDBCardBody>
         </MDBCard>
+        </form>
       </MDBContainer>
     </div>
-  );
+  )
 }
 
-export default ListTractor;
+export default ConfirmBookingDetails

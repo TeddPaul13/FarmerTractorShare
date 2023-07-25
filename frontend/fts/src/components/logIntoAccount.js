@@ -4,6 +4,8 @@ import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
 import Validation from "./LoginValidation";
 import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/esm/Button";
+import axios from "axios";
 
 import {
   MDBBtn,
@@ -38,9 +40,19 @@ export default function LogIntoAccount() {
   
     if (validationResults.email === "" && validationResults.password === "") {
       // If no error in login page navigate to Landing page #FETCH DATA HERE later#
-      navigate("/landingpage");
+      axios
+      .post("http://localhost:8080/api/farmers/login/", values)
+      .then((response) => {
+        console.log(response);
+        alert("Login Succesful")
+        navigate("/landingpage");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("An error occured")
+      })
     }
-    console.log(errors)
+  
   };
 
   return (
@@ -88,13 +100,13 @@ export default function LogIntoAccount() {
               <div className="d-flex flex-row justify-content-center mb-4">
                 <p>Forgot Password?</p>
               </div>
-              <MDBBtn
+              <Button
                 className="mb-4 w-100 gradient-custom-4"
                 type="submit"
                 size="lg"
               >
                 Sign In
-              </MDBBtn>
+              </Button>
 
               <div className="d-flex flex-row justify-content-center mb-4">
                 <p>

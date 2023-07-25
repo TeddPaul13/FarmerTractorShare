@@ -8,7 +8,7 @@ const Controllers = require("../controllers");
 //for JWT test
 router.post('/register', signupValidation, Controllers.farmerController.registerUser);
 router.post('/login', loginValidation, Controllers.farmerController.loginUser);
-router.post('/get-user', signupValidation, Controllers.farmerController.getUser);
+//router.post('/get-user', signupValidation, Controllers.farmerController.getUser);
 
 //********JWT test End */
 

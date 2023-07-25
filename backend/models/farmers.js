@@ -12,7 +12,7 @@ farmers.init(
     },
     firstName: { type: DataTypes.STRING, allowNull: false, required: true },
     lastName: { type: DataTypes.STRING, allowNull: false, required: true },
-    emailId: {
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
       required: true,
