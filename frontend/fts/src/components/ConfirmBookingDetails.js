@@ -1,9 +1,10 @@
 import React from 'react'
+
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import OffcanvasNavbar from "./OffcanvasNavbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../App.css";
 
 import {
@@ -20,6 +21,12 @@ import {
 } from "mdb-react-ui-kit";
 
 function ConfirmBookingDetails() {
+
+  const navigate  = useNavigate()
+
+  const navigateToBookingMessage = () =>{
+navigate("/bookingmesssage")
+  }
   return (
     <div>
         <OffcanvasNavbar />
@@ -187,7 +194,7 @@ function ConfirmBookingDetails() {
             </div>
 
             <div className=" d-flex justify-content-center">
-              <Button className="mb-4 w-50  gradient-custom-4" size="lg" type="submit">
+              <Button className="mb-4 w-50  gradient-custom-4" size="lg" onClick={navigateToBookingMessage}>
                 Book
               </Button>
             </div>

@@ -4,7 +4,7 @@ const Controllers = require("../controllers");
 router.get("/", (req, res) => {
   Controllers.tractorController.getTractors(res);
 });
-router.post("/create", (req, res) => {
+router.post("/listatractor", (req, res) => {
   Controllers.tractorController.createTractors(req.body, res);
 });
 router.put("/update/:id", (req, res) => {

@@ -11,6 +11,20 @@ const getTractors = (res) => {
 };
 const createTractors = (data, res) => {
   Models.Tractor.create(data)
+ //const newTractor = await Models.Tractor.create
+//  ({
+//     tractorModel: req.body.tractorModel,
+//     tractorImage: req.body.tractorImage,
+//     tractorDescription: req.body.tractorDescription,
+//     availabileFrom: req.body.availabileFrom,
+//     availabileUntil: req.body.availabileUntil,
+//     deliveryOption: req.body.deliveryOption,
+//     pricePerDay: req.body.pricePerDay,
+//     address: req.body.address,
+//     postcode: req.body.postcode,
+//     suburb: req.body.suburb,
+//     state: req.body.state
+//   })
     .then(function (data) {
       res.send({ result: 200, data: data });
     })

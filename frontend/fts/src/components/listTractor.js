@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import OffcanvasNavbar from "./OffcanvasNavbar";
 import { Link } from "react-router-dom";
 import "../App.css";
+import axios from "axios";
 
 import {
   MDBBtn,
@@ -19,11 +20,43 @@ import {
   MDBSelect,
 } from "mdb-react-ui-kit";
 
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+
 
 function ListTractor() {
+  const [tractorDetails, setTractorDetails] = useState({
+    tractorModel: "",
+    tractorImage: "",
+    tractorDescription: "",
+    availableFrom: "",
+    availableUntil: "",
+    deliveryOption: "",
+    pricePerDay:"",
+    address:"",
+    postcode:"",
+    suburb: "",
+    state: ""
+  })
+  const changeTractorDetail = (event) =>{
+    setTractorDetails({...tractorDetails, tractorModel: event.target.value})
+    console.log(event)
+    console.log(event.target.value)
+  }
+
+  const handleSubmit =(event) =>{
+    event.preventDefault();
+    setTractorDetails((prev ) => ({...prev, [event.target.name]: event.target.value}))
+    console.log("Data being sent to API:", tractorDetails);
+    // axios
+    // .post("http://localhost:8080/api/tractors/listatractor/", tractorDetails)
+    // .then((response) => {
+    //   console.log(response);
+    //   alert("Tractor Details Submitted")
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    //   alert("Sorry an error occured")
+    // })
+  }
   return (
     <div>
       <OffcanvasNavbar />
@@ -31,6 +64,7 @@ function ListTractor() {
         fluid
         className="d-flex align-items-center justify-content-center"
       >
+        <Form onSubmit={handleSubmit}>
         <div className="mask gradient-custom-3"></div>
         <MDBCard className="m-5" style={{ maxWidth: "600px" }}>
           <MDBCardBody className="px-5">
@@ -44,7 +78,9 @@ function ListTractor() {
               placeholder="Enter Tractor Name and Model"
               size="md"
               id="form2"
-              type="email"
+              onChange={changeTractorDetail}
+              type="text"
+              name="tractorModel"
             />
              <MDBInput
               wrapperClass="mb-4"
@@ -53,12 +89,14 @@ function ListTractor() {
               size="md"
               id="form3"
               type="text"
+              name="tractorImage"
             />
             <div className="form-floating mb-4">
               <textarea
                 class="form-control"
                 placeholder="tractor description"
                 id="floatingTextarea"
+                name="tractorDescription"
               ></textarea>
               <label for="floatingTextarea">Enter Tractor Description</label>
             </div>
@@ -71,11 +109,12 @@ function ListTractor() {
                   size="md"
                   id="form4"
                   type="text"
+                  name="address"
                 />
               </MDBCol>
 
               <MDBCol md="6">
-                <Form.Select aria-label="Default select example" size="md">
+                <Form.Select aria-label="Default select example" size="md" name="state">
                   <option>State</option>
                   <option value="1">NSW</option>
                   <option value="2">VIC</option>
@@ -96,6 +135,7 @@ function ListTractor() {
                   size="md"
                   id="form1"
                   type="text"
+                  name="suburb"
                 />
               </MDBCol>
 
@@ -106,7 +146,8 @@ function ListTractor() {
                   placeholder="Postcode"
                   size="md"
                   id="form2"
-                  type="text"
+                  type="number"
+                  name="postcode"
                 />
               </MDBCol>
             </MDBRow>
@@ -117,7 +158,7 @@ function ListTractor() {
                   wrapperClass="mb-4"
                   // label="Postcode"
                   placeholder="Available from"
-                  name=" availablefrom"
+                  name=" availableFrom"
                   size="md"
                   id="form1"
                   type="date"
@@ -133,6 +174,7 @@ function ListTractor() {
                   size="md"
                   id="form2"
                   type="date"
+                  name="availableUntil"
                 />
               </MDBCol>
             </MDBRow>
@@ -148,16 +190,28 @@ function ListTractor() {
               </select>
             </div>
 
-            <div className="input-group mb-4">
+            <MDBInput
+                  wrapperClass="mb-4"
+                  // label="Postcode"
+                  placeholder="Enter Price in AU$"
+                  name=" pricePerDay"
+                  size="md"
+                  id="form1"
+                  type="number"
+                />
+
+            {/* <div className="input-group mb-4">
               <MDBInput
-                type="text"
+                type="number"
+    
                 class="form-control"
-                aria-label="Dollar amount (with dot and two decimal places)"
+                aria-label="Enter a number"
                 placeholder="Enter Price per day"
+                name="pricePerDay"
               />
               <span class="input-group-text">AU$</span>
               <span class="input-group-text">0.00</span>
-            </div>
+            </div> */}
             {/* <MDBRow>
               <MDBCol md="6" className="d-flex mb-4">
                 <p>Upload Tractor Image</p>
@@ -182,12 +236,13 @@ function ListTractor() {
             </div>
 
             <div className=" d-flex justify-content-center">
-              <Button className="mb-4 w-50  gradient-custom-4" size="lg">
+              <Button className="mb-4 w-50  gradient-custom-4" size="lg" type="submit">
                 Submit
               </Button>
             </div>
           </MDBCardBody>
         </MDBCard>
+        </Form>
       </MDBContainer>
     </div>
   );

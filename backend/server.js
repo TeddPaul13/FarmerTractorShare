@@ -25,8 +25,8 @@ app.use(cors());
 const farmerRouters = require("./routes/farmerRoutes");
 app.use("/api/farmers", farmerRouters);
 
-// const tractorRouters = require("./routes/tractorRoutes");
-// app.use("/api/tractors", tractorRouters);
+const tractorRouters = require("./routes/tractorRoutes");
+app.use("/api/tractors", tractorRouters);
 
 // const bookingRouters = require("./routes/bookingRoutes");
 // app.use("/api/bookings", bookingRouters);
