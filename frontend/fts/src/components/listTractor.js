@@ -37,7 +37,8 @@ function ListTractor() {
     state: ""
   })
   const changeTractorDetail = (event) =>{
-    setTractorDetails({...tractorDetails, tractorModel: event.target.value})
+    const {name, value} = event.target;
+setTractorDetails((prevState) => ({...prevState, [name]:value}))
     console.log(event)
     console.log(event.target.value)
   }
@@ -46,16 +47,16 @@ function ListTractor() {
     event.preventDefault();
     setTractorDetails((prev ) => ({...prev, [event.target.name]: event.target.value}))
     console.log("Data being sent to API:", tractorDetails);
-    // axios
-    // .post("http://localhost:8080/api/tractors/listatractor/", tractorDetails)
-    // .then((response) => {
-    //   console.log(response);
-    //   alert("Tractor Details Submitted")
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    //   alert("Sorry an error occured")
-    // })
+    axios
+    .post("http://localhost:8080/api/tractors/listatractor/", tractorDetails)
+    .then((response) => {
+      console.log(response);
+      alert("Tractor Details Submitted")
+    })
+    .catch((err) => {
+      console.log(err);
+      alert("Sorry an error occured")
+    })
   }
   return (
     <div>
@@ -89,6 +90,7 @@ function ListTractor() {
               size="md"
               id="form3"
               type="text"
+              onChange={changeTractorDetail}
               name="tractorImage"
             />
             <div className="form-floating mb-4">
@@ -97,6 +99,7 @@ function ListTractor() {
                 placeholder="tractor description"
                 id="floatingTextarea"
                 name="tractorDescription"
+                onChange={changeTractorDetail}
               ></textarea>
               <label for="floatingTextarea">Enter Tractor Description</label>
             </div>
@@ -110,19 +113,20 @@ function ListTractor() {
                   id="form4"
                   type="text"
                   name="address"
+                  onChange={changeTractorDetail}
                 />
               </MDBCol>
 
               <MDBCol md="6">
-                <Form.Select aria-label="Default select example" size="md" name="state">
+                <Form.Select aria-label="Default select example" size="md" name="state" onChange={changeTractorDetail}>
                   <option>State</option>
-                  <option value="1">NSW</option>
-                  <option value="2">VIC</option>
-                  <option value="3">WA</option>
-                  <option value="4">SA</option>
-                  <option value="5">TAS</option>
-                  <option value="6">ACT</option>
-                  <option value="7">QLD</option>
+                  <option value="NSW">NSW</option>
+                  <option value="VIC">VIC</option>
+                  <option value="WA">WA</option>
+                  <option value="SA">SA</option>
+                  <option value="TAS">TAS</option>
+                  <option value="ACT">ACT</option>
+                  <option value="QLD">QLD</option>
                 </Form.Select>
               </MDBCol>
             </MDBRow>
@@ -130,24 +134,25 @@ function ListTractor() {
               <MDBCol md="6">
                 <MDBInput
                   wrapperClass="mb-4"
-                  // label="Postcode"
+                  
                   placeholder="Suburb"
                   size="md"
                   id="form1"
                   type="text"
                   name="suburb"
+                  onChange={changeTractorDetail}
                 />
               </MDBCol>
 
               <MDBCol md="6">
                 <MDBInput
                   wrapperClass="mb-4"
-                  // label="Country"
                   placeholder="Postcode"
                   size="md"
                   id="form2"
                   type="number"
                   name="postcode"
+                  onChange={changeTractorDetail}
                 />
               </MDBCol>
             </MDBRow>
@@ -156,12 +161,13 @@ function ListTractor() {
               <label for="availablefrom">Available From:</label>
                 <MDBInput
                   wrapperClass="mb-4"
-                  // label="Postcode"
+                
                   placeholder="Available from"
-                  name=" availableFrom"
+                  name="availableFrom"
                   size="md"
                   id="form1"
                   type="date"
+                  onChange={changeTractorDetail}
                 />
               </MDBCol>
 
@@ -169,12 +175,13 @@ function ListTractor() {
               <label for="availableuntil">Available Until:</label>
                 <MDBInput
                   wrapperClass="mb-4"
-                  // label="Country"
+                 
                   placeholder="Available Until"
                   size="md"
                   id="form2"
                   type="date"
                   name="availableUntil"
+                  onChange={changeTractorDetail}
                 />
               </MDBCol>
             </MDBRow>
@@ -182,22 +189,23 @@ function ListTractor() {
               <label class="input-group-text" for="inputGroupSelect01">
                 Delivery Options
               </label>
-              <select class="form-select" id="inputGroupSelect01">
+              <select class="form-select" id="inputGroupSelect01" name="deliveryOption" onChange={changeTractorDetail}>
                 <option selected>Choose...</option>
-                <option value="1">Available</option>
-                <option value="2">Not Available</option>
-                <option value="3">Can be arranged</option>
+                <option value="Available">Available</option>
+                <option value="Not Available">Not Available</option>
+                <option value="Can be arranged">Can be arranged</option>
               </select>
             </div>
 
             <MDBInput
                   wrapperClass="mb-4"
-                  // label="Postcode"
+  
                   placeholder="Enter Price in AU$"
-                  name=" pricePerDay"
+                  name="pricePerDay"
                   size="md"
                   id="form1"
                   type="number"
+                  onChange={changeTractorDetail}
                 />
 
             {/* <div className="input-group mb-4">
