@@ -11,14 +11,6 @@ tractor.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    farmer_id:{
-      type: DataTypes.INTEGER,
-      references: {
-        model: Farmers,
-        key: 'id'
-      }
-    
-    },
     tractorImage: { type: DataTypes.STRING, allowNull: false, required: true },
     tractorModel: { type: DataTypes.STRING, allowNull: false, required: true },
     tractorDescription: { type: DataTypes.STRING, allowNull: false, required: true },

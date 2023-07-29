@@ -31,17 +31,18 @@ export default function OffcanvasNavbar(props) {
             id={`offcanvasNavbar-expand-${expand}`}
             aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
             placement="end"
+            className="offCanvasbg"
           >
-            <Offcanvas.Header closeButton>
+            <Offcanvas.Header closeButton >
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`} className="navTitle">
                 Farmer Tractor Share
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-center align-items-center flex-grow-1 pe-3">
-              <Nav.Link><Link to="/" className="me-4 text-decoration-none text-white">Home</Link></Nav.Link>
-              <Nav.Link><Link to="/about" className="me-4 text-decoration-none text-white">About</Link></Nav.Link>
-              <Nav.Link> <Link to="/safety" className="me-4 text-decoration-none text-white">Safety</Link></Nav.Link>
+              <Nav.Link><Link to="/" className="me-4 text-decoration-none text-white fs-5">Home</Link></Nav.Link>
+              <Nav.Link><Link to="/about" className="me-4 text-decoration-none text-white fs-5">About</Link></Nav.Link>
+              <Nav.Link> <Link to="/safety" className="me-4 text-decoration-none text-white fs-5">Safety</Link></Nav.Link>
               </Nav>
               <Button className="me-2 bg-white text-primary " variant="outline-success" onClick={navigateToLoginPage}>Sign In</Button>
               <Button className="me-2 bg-white text-primary"variant="outline-success" onClick={natigateToCreateAccountPage}>Create Account</Button>

@@ -3,11 +3,11 @@ const Tractor = require("./tractor");
 const Booking = require("./booking");
 
 
-Farmers.hasMany(Tractor);
+// Farmers.hasMany(Tractor);
 
-Farmers.hasMany(Booking);
+// Farmers.hasMany(Booking);
 
-Booking.hasOne(Tractor);
+// Booking.hasOne(Tractor);
 
 async function init() {
   await Promise.all([

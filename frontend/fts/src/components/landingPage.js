@@ -22,18 +22,18 @@ function LandingPage() {
   const [tractorList, setTractorList] = useState([]);
 
   useEffect(() => {
-    axios.get("https://api.squiggle.com.au/?q=teams").then((response) => {
-      const allTractors = response.data.teams;
-      setTractorList(allTractors);
-      console.log(response);
-      
-    });
-    // axios
-    // .get("http://localhost:8080/api/tractors/")
-    // .then((response) => {
+    // axios.get("https://api.squiggle.com.au/?q=teams").then((response) => {
+    //   const allTractors = response.data.teams;
+    //   setTractorList(allTractors);
     //   console.log(response);
-    //   setTractorList(response)
+      
     // });
+    axios
+    .get("http://localhost:8080/api/tractors/")
+    .then((response) => {
+      console.log(response.data.data);
+      setTractorList(response.data.data)
+    });
   }, []);
   return (
     <div>
@@ -44,7 +44,7 @@ function LandingPage() {
       <div className="d-flex justify-content-center align-items-center">
         <Row >
           <Col>
-            <button className="mb-4 w-100 border-0 fs-4 rounded-2 bg-info text-white fw-bold" variant="outline-success" size="lg" onClick={navigateToListTractor}>
+            <button className="mb-4 w-100 border-0 fs-4 rounded-2 lightGreenbg text-white fw-bold" variant="outline-success" size="lg" onClick={navigateToListTractor}>
               List a Tractor
             </button>
           </Col>
@@ -70,13 +70,13 @@ function LandingPage() {
               <Card className=" d-flex justify-content-center">
                 <Card.Img
                   className="tractorImg"
-                  src={"https://squiggle.com.au/" + tractor.logo}
+                  src={tractor.tractorImage + ".jpg"}
                   alt="Tractor Image"
                 />
 
                 <Card.Body > 
-                  <Card.Title>{tractor.name}</Card.Title>
-                  <Card.Text>{tractor.abbrev}</Card.Text>
+                  <Card.Title>{tractor.tractorModel}</Card.Title>
+                  <Card.Text>{tractor.tractorDescription}</Card.Text>
                   <div className="d-flex justify-content-center">
                   <button className="mb-4 border-0 gradient-custom-4" size="lg" onClick={navigateToConfrimBooking}> Book Tractor</button>
                   </div>
