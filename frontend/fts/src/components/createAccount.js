@@ -1,10 +1,10 @@
-import React, {useState}from "react";
+import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import OffcanvasNavbar from "./OffcanvasNavbar";
 import { Link } from "react-router-dom";
 import Validation from "./SignupValidation";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/esm/Button";
 import axios from "axios";
 
@@ -21,46 +21,55 @@ import {
 } from "mdb-react-ui-kit";
 
 export default function CreateAccount() {
-
-   // Transfer navigation function to handle submit after finalising the validation for create Account.
-   const navigate = useNavigate();
+  // Transfer navigation function to handle submit after finalising the validation for create Account.
+  const navigate = useNavigate();
   //  const natigateToLandingPage = () =>{
   //    navigate("/landingpage")
   //  }
 
-
   const [values, setValues] = useState({
-    firstName:'', lastName:'', address:'', suburb:'', state:'', postcode:'',
-    emailId:'', password:'', confrimPassword:'', country:''
-    
-  })
-  const [errors, setErrors] = useState({})
-  const handleInput = (event)=>{
-    setValues(prev => ({...prev, [event.target.name]: event.target.value}))
-  }
+    firstName: "",
+    lastName: "",
+    address: "",
+    suburb: "",
+    state: "",
+    postcode: "",
+    emailId: "",
+    password: "",
+    confrimPassword: "",
+    country: "",
+  });
+  const [errors, setErrors] = useState({});
+  const handleInput = (event) => {
+    setValues((prev) => ({ ...prev, [event.target.name]: event.target.value }));
+  };
 
-  const handleSubmit = (event) =>{
+  const handleSubmit = (event) => {
     event.preventDefault();
-    const validationResults = Validation(values)
+    const validationResults = Validation(values);
     setErrors(validationResults);
-  
-    if (validationResults.email === "" && validationResults.password === "" && validationResults.firstName === "" && validationResults.lastName === "") {
-      
+
+    if (
+      validationResults.email === "" &&
+      validationResults.password === "" &&
+      validationResults.firstName === "" &&
+      validationResults.lastName === ""
+    ) {
       // If no error in login page navigate to Landing page #FETCH DATA HERE later#
       axios
-    .post("http://localhost:8080/api/farmers/register/", values)
-    .then((response) => {
-      console.log(response);
-      alert("Registration Succesful")
-      navigate("/login");
-    })
-    .catch((err) => {
-      console.log(err);
-      alert("An error occured")
-    })
-      
-    }}
- 
+        .post("http://localhost:8080/api/farmers/register/", values)
+        .then((response) => {
+          console.log(response);
+          alert("Registration Succesful");
+          navigate("/login");
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("An error occured");
+        });
+    }
+  };
+
   return (
     <>
       <OffcanvasNavbar />
@@ -70,58 +79,64 @@ export default function CreateAccount() {
       >
         <div className="mask gradient-custom-3"></div>
         <form action="" onSubmit={handleSubmit}>
-        <MDBCard className="m-5" style={{ maxWidth: "600px" }}>
-          <MDBCardBody className="px-5">
-            <h2 className="text-uppercase text-center mb-5">
-              Create an account
-            </h2>
-            <MDBRow>
-              <MDBCol md="6">
-                <div className="mb-4">
-                <MDBInput
-                  //wrapperClass="mb-4"
-                  // label="First Name"
-                  placeholder="First Name"
-                  size="lg"
-                  id="form1"
-                  type="text"
-                  name ="firstName"
-                  onChange={handleInput}
-                />
-                {errors.firstName && <span className="text-danger">{errors.firstName} </span>}
-                </div>
-              </MDBCol>
+          <MDBCard className="m-5" style={{ maxWidth: "600px" }}>
+            <MDBCardBody className="px-5">
+              <h2 className="text-uppercase text-center mb-5">
+                Create an account
+              </h2>
+              <MDBRow>
+                <MDBCol md="6">
+                  <div className="mb-4">
+                    <MDBInput
+                      //wrapperClass="mb-4"
+                      // label="First Name"
+                      placeholder="First Name"
+                      size="lg"
+                      id="form1"
+                      type="text"
+                      name="firstName"
+                      onChange={handleInput}
+                    />
+                    {errors.firstName && (
+                      <span className="text-danger">{errors.firstName} </span>
+                    )}
+                  </div>
+                </MDBCol>
 
-              <MDBCol md="6">
+                <MDBCol md="6">
+                  <div className="mb-4">
+                    <MDBInput
+                      // wrapperClass="mb-4"
+                      // label="Last Name"
+                      placeholder="Last Name"
+                      size="lg"
+                      id="form2"
+                      type="text"
+                      name="lastName"
+                      onChange={handleInput}
+                    />
+                    {errors.lastName && (
+                      <span className="text-danger">{errors.lastName} </span>
+                    )}
+                  </div>
+                </MDBCol>
+              </MDBRow>
               <div className="mb-4">
                 <MDBInput
-                 // wrapperClass="mb-4"
-                  // label="Last Name"
-                  placeholder="Last Name"
+                  //wrapperClass="mb-4"
+                  // label="Your Email"
+                  placeholder="Enter Your Email"
                   size="lg"
                   id="form2"
-                  type="text"
-                  name ="lastName"
+                  type="email"
+                  name="email"
                   onChange={handleInput}
                 />
-                {errors.lastName && <span className="text-danger">{errors.lastName} </span>}
-                </div>
-              </MDBCol>
-            </MDBRow>
-            <div className="mb-4">
-            <MDBInput
-              //wrapperClass="mb-4"
-              // label="Your Email"
-              placeholder="Enter Your Email"
-              size="lg"
-              id="form2"
-              type="email"
-              name ="email"
-              onChange={handleInput}
-            />
-            {errors.email && <span className="text-danger">{errors.email} </span>}
-            </div>
-            {/* <div className="mb-4">
+                {errors.email && (
+                  <span className="text-danger">{errors.email} </span>
+                )}
+              </div>
+              {/* <div className="mb-4">
             <MDBInput
               //wrapperClass="mb-4"
               // label="Your Address"
@@ -134,7 +149,7 @@ export default function CreateAccount() {
             />
             {errors.address && <span className="text-danger">{errors.address} </span>}
            </div> */}
-            {/* <MDBRow>
+              {/* <MDBRow>
               <MDBCol md="6">
               <div className="mb-4">
                 <MDBInput
@@ -166,7 +181,7 @@ export default function CreateAccount() {
                 {errors.state && <span className="text-danger">{errors.state} </span>}
               </MDBCol>
             </MDBRow> */}
-            {/* <MDBRow>
+              {/* <MDBRow>
               <MDBCol md="6">
               <div className="mb-4">
                 <MDBInput
@@ -199,51 +214,59 @@ export default function CreateAccount() {
                 </div>
               </MDBCol>
             </MDBRow> */}
-            <div className="mb-4">
-            <MDBInput
-              //wrapperClass="mb-4"  
-              // label="Password"
-              placeholder="Enter Your Password"
-              size="lg"
-              id="form3"
-              type="password"
-              name ="password"
-              onChange={handleInput}
-            />
-            {errors.password && <span className="text-danger">{errors.password} </span>}
-            </div>
-            <div className="mb-4">
-            <MDBInput
-              //wrapperClass="mb-4"
-              // label="Repeat your password"
-              placeholder="Confirm Your Password"
-              size="lg"
-              id="form4"
-              type="password"
-              name ="confirmPassword"
-              onChange={handleInput}
-            />
-            {errors.confrimPassword && <span className="text-danger">{errors.confrimPassword} </span>}
-            </div>
-            <div className="d-flex flex-row justify-content-center mb-4">
-              <MDBCheckbox
-                name="flexCheck"
-                id="flexCheckDefault"
-                label="I agree all statements in Terms of service"
-              />
-            </div>
-            <Button className="mb-4 w-100 gradient-custom-4" size="lg" onClick={handleSubmit} >
-              Register
-            </Button>
-            <div className="d-flex flex-row justify-content-center mb-4">
-              <p>
-                Have Account Already? <Link to="/login">Login Here</Link>
-              </p>
-            </div>
-          </MDBCardBody>
-        </MDBCard>
+              <div className="mb-4">
+                <MDBInput
+                  //wrapperClass="mb-4"
+                  // label="Password"
+                  placeholder="Enter Your Password"
+                  size="lg"
+                  id="form3"
+                  type="password"
+                  name="password"
+                  onChange={handleInput}
+                />
+                {errors.password && (
+                  <span className="text-danger">{errors.password} </span>
+                )}
+              </div>
+              <div className="mb-4">
+                <MDBInput
+                  //wrapperClass="mb-4"
+                  // label="Repeat your password"
+                  placeholder="Confirm Your Password"
+                  size="lg"
+                  id="form4"
+                  type="password"
+                  name="confirmPassword"
+                  onChange={handleInput}
+                />
+                {errors.confrimPassword && (
+                  <span className="text-danger">{errors.confrimPassword} </span>
+                )}
+              </div>
+              <div className="d-flex flex-row justify-content-center mb-4">
+                <MDBCheckbox
+                  name="flexCheck"
+                  id="flexCheckDefault"
+                  label="I agree all statements in Terms of service"
+                />
+              </div>
+              <Button
+                className="mb-4 w-100 gradient-custom-4"
+                size="lg"
+                onClick={handleSubmit}
+              >
+                Register
+              </Button>
+              <div className="d-flex flex-row justify-content-center mb-4">
+                <p>
+                  Have Account Already? <Link to="/login">Login Here</Link>
+                </p>
+              </div>
+            </MDBCardBody>
+          </MDBCard>
         </form>
       </MDBContainer>
     </>
   );
-};
+}

@@ -35,24 +35,23 @@ export default function LogIntoAccount() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const validationResults = Validation(values)
+    const validationResults = Validation(values);
     setErrors(validationResults);
-  
+
     if (validationResults.email === "" && validationResults.password === "") {
       // If no error in login page navigate to Landing page #FETCH DATA HERE later#
       axios
-      .post("http://localhost:8080/api/farmers/login/", values)
-      .then((response) => {
-        console.log(response);
-        alert("Login Succesful")
-        navigate("/landingpage");
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("An error occured")
-      })
+        .post("http://localhost:8080/api/farmers/login/", values)
+        .then((response) => {
+          console.log(response);
+          alert("Login Succesful");
+          navigate("/landingpage");
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("An error occured");
+        });
     }
-  
   };
 
   return (
@@ -110,7 +109,10 @@ export default function LogIntoAccount() {
 
               <div className="d-flex flex-row justify-content-center mb-4">
                 <p>
-                  Not a member? <Link to="/createaccount" className="text-decoration-none">Register</Link>
+                  Not a member?{" "}
+                  <Link to="/createaccount" className="text-decoration-none">
+                    Register
+                  </Link>
                 </p>
               </div>
             </MDBCardBody>
