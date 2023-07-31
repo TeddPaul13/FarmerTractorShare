@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import OffcanvasNavbar from "./OffcanvasNavbar";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../App.css";
 import axios from "axios";
 
@@ -23,6 +23,7 @@ import {
 
 
 function ListTractor() {
+  const navigate = useNavigate()
   const [tractorDetails, setTractorDetails] = useState({
     tractorModel: "",
     tractorImage: "",
@@ -57,6 +58,7 @@ setTractorDetails((prevState) => ({...prevState, [name]:value}))
       console.log(err);
       alert("Sorry an error occured")
     })
+    navigate("/listingmesssage")
   }
   return (
     <div>

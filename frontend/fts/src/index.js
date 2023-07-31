@@ -13,6 +13,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LandingPage from "./components/landingPage";
 import ConfirmBookingDetails from "./components/ConfirmBookingDetails";
 import BookingMessage from "./components/BookingMessage";
+import ListConfirmation from "./components/ListConfirmation";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
   {
     path: "/bookingmesssage",
     element: <BookingMessage />,
+  },
+  {
+    path: "/listingmesssage",
+    element: <ListConfirmation />,
   },
 ]);
 

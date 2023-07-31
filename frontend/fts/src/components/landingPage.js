@@ -9,6 +9,7 @@ import OffcanvasNavbar from "./OffcanvasNavbar";
 
 
 function LandingPage() {
+  const [tractorList, setTractorList] = useState([])
 
   const navigate = useNavigate();
   const navigateToListTractor = () =>{
@@ -19,15 +20,7 @@ function LandingPage() {
   }
 
 
-  const [tractorList, setTractorList] = useState([]);
-
   useEffect(() => {
-    // axios.get("https://api.squiggle.com.au/?q=teams").then((response) => {
-    //   const allTractors = response.data.teams;
-    //   setTractorList(allTractors);
-    //   console.log(response);
-      
-    // });
     axios
     .get("http://localhost:8080/api/tractors/")
     .then((response) => {
@@ -35,6 +28,8 @@ function LandingPage() {
       setTractorList(response.data.data)
     });
   }, []);
+
+
   return (
     <div>
       <OffcanvasNavbar />
@@ -56,7 +51,14 @@ function LandingPage() {
             <h4 > Enter your postcode to Search Available Tractors near you</h4>
           </Col>
           <Col className="d-flex justify-content-left align-items-center">
-          <input className="form-control bg-light w-50" type="search" placeholder="Enter postcode here" aria-label="Search" />
+          <input className="form-control bg-light w-50" 
+          type="search" 
+          placeholder="Enter postcode here" 
+          aria-label="Search" 
+          
+          
+          />
+          
           </Col>
         </Row>
       </div>

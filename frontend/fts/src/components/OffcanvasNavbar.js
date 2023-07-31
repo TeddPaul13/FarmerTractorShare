@@ -31,7 +31,7 @@ export default function OffcanvasNavbar(props) {
             id={`offcanvasNavbar-expand-${expand}`}
             aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
             placement="end"
-            className="offCanvasbg"
+            className="lightGreenbg"
           >
             <Offcanvas.Header closeButton >
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`} className="navTitle">
