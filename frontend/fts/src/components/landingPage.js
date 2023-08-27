@@ -66,10 +66,10 @@ function LandingPage() {
         <h5>Available Tractors for Hire</h5>
       </div>
       <Container> 
-        <Row>
+        <Row className="tractorRow mb-4">
           {tractorList.map((tractor, k) => (
-            <Col className="teamcols" key={k} xs={12} md={4} lg={3}>
-              <Card className=" d-flex justify-content-center">
+            <Col className="teamcols mb-4" key={k} xs={12} md={4} lg={3}>
+              <Card className=" d-flex justify-content-center tractorRow">
                 <Card.Img
                   className="tractorImg"
                   src={tractor.tractorImage + ".jpg"}

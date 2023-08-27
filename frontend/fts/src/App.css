@@ -19,6 +19,12 @@
 .lightGreenbg{
   background: #84fab0;
 }
+.tractorRow{
+   height: 500px;
+}
+.tractorImg{
+  height: 300px;
+}
 
 
 .App-header {
