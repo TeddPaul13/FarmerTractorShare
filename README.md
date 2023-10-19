@@ -1,5 +1,8 @@
 # FarmerTractorShare
+
 FTS is a platform for Farmers to hire tractors from neighbouring farmers.
+
+![MarkdownPicture](https://github.com/TeddPaul13/FarmerTractorShare/assets/101962304/d60a4e8d-0b6e-495d-a62c-2f9a564f334f)
 
 ## Description
 
